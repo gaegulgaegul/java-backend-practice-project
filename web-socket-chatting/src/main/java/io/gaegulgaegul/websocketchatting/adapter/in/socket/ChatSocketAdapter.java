@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component
-class ChatSocketAdapter extends TextWebSocketHandler {
+public class ChatSocketAdapter extends TextWebSocketHandler {
 
 	private final List<WebSocketSession> sessions = new ArrayList<>();
 
