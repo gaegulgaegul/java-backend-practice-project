@@ -22,7 +22,7 @@ class ChattingSocketAdapter {
 	 * @param request
 	 */
 	@MessageMapping("/messages")
-	public void chat(@Valid ChatRequest request) {
+	void chat(@Valid ChatRequest request) {
 		sendMessageUseCase.sendMessage(request);
 	}
 }
