@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.socket.WebSocketSession;
 
 /**
  * 채팅방 저장소
@@ -14,7 +13,6 @@ import org.springframework.web.socket.WebSocketSession;
 @Repository
 public class ChatRoomRepository {
 	private final Map<String, ChatRoomEntity> chatRoomMap = new HashMap<>();
-	private final Map<String, WebSocketSession> sessionMap = new HashMap<>();
 
 	/**
 	 * 채팅방 목록 조회

@@ -1,6 +1,5 @@
 package io.gaegul.websocketstompchatting;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,9 +22,9 @@ public class InitChatRoom implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		List<ChatRoomEntity> chatRoomEntities = List.of(
-			new ChatRoomEntity(UUID.randomUUID().toString(), "1번방", new HashSet<>()),
-			new ChatRoomEntity(UUID.randomUUID().toString(), "2번방", new HashSet<>()),
-			new ChatRoomEntity(UUID.randomUUID().toString(), "3번방", new HashSet<>())
+			new ChatRoomEntity(UUID.randomUUID().toString(), "1번방"),
+			new ChatRoomEntity(UUID.randomUUID().toString(), "2번방"),
+			new ChatRoomEntity(UUID.randomUUID().toString(), "3번방")
 		);
 		chatRoomRepository.saveAll(chatRoomEntities);
 	}
