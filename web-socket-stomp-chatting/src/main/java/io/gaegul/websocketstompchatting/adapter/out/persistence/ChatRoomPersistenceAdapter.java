@@ -10,6 +10,9 @@ import io.gaegul.websocketstompchatting.application.port.out.GetChatRoomListPort
 import io.gaegul.websocketstompchatting.domain.ChatRoom;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 채팅방 정보 관리 영속성 어댑터
+ */
 @Component
 @RequiredArgsConstructor
 class ChatRoomPersistenceAdapter implements GetChatRoomListPort {

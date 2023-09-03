@@ -9,5 +9,9 @@ import io.gaegul.websocketstompchatting.domain.ChatRoom;
  */
 public interface GetChatRoomListPort {
 
+	/**
+	 * 채팅방 목록 조회
+	 * @return
+	 */
 	List<ChatRoom> getChatRooms();
 }
