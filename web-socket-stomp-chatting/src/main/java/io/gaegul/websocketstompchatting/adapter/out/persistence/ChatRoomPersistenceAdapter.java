@@ -2,11 +2,12 @@ package io.gaegul.websocketstompchatting.adapter.out.persistence;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import io.gaegul.websocketstompchatting.application.port.out.GetChatRoomListPort;
+import io.gaegul.websocketstompchatting.application.port.out.GetChatRoomPort;
 import io.gaegul.websocketstompchatting.domain.ChatRoom;
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +16,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Component
 @RequiredArgsConstructor
-class ChatRoomPersistenceAdapter implements GetChatRoomListPort {
+class ChatRoomPersistenceAdapter implements GetChatRoomPort {
 	private final ChatRoomRepository chatRoomRepository;
 
 	@Override
@@ -25,11 +26,27 @@ class ChatRoomPersistenceAdapter implements GetChatRoomListPort {
 			return List.of();
 		}
 		return chatRooms.stream()
-			.map(item -> new ChatRoom(
-				item.getId(),
-				item.getName(),
-				item.getSessionIds()
-			))
+			.map(item -> toDomain(item))
 			.collect(Collectors.toList());
+	}
+
+	@Override
+	public ChatRoom getChatRoom(String id) {
+		ChatRoomEntity entity = chatRoomRepository.findById(id)
+			.orElseThrow(NoSuchElementException::new);
+		return toDomain(entity);
+	}
+
+	/**
+	 * 도메인 객체 매핑
+	 * @param entity
+	 * @return
+	 */
+	private ChatRoom toDomain(ChatRoomEntity entity) {
+		return new ChatRoom(
+			entity.getId(),
+			entity.getName(),
+			entity.getSessionIds()
+		);
 	}
 }

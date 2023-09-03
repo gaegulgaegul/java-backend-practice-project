@@ -3,6 +3,7 @@ package io.gaegul.websocketstompchatting.adapter.out.persistence;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.socket.WebSocketSession;
@@ -28,8 +29,12 @@ public class ChatRoomRepository {
 	 * @param id
 	 * @return
 	 */
-	public ChatRoomEntity findById(String id) {
-		return chatRoomMap.get(id);
+	public Optional<ChatRoomEntity> findById(String id) {
+		ChatRoomEntity entity = chatRoomMap.get(id);
+		if (entity == null) {
+			return Optional.empty();
+		}
+		return Optional.of(entity);
 	}
 
 	/**
@@ -41,4 +46,5 @@ public class ChatRoomRepository {
 			this.chatRoomMap.put(entity.getId(), entity);
 		}
 	}
+
 }

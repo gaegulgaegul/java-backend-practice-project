@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import io.gaegul.websocketstompchatting.application.port.in.GetChatRoomUseCase;
-import io.gaegul.websocketstompchatting.application.port.out.GetChatRoomListPort;
+import io.gaegul.websocketstompchatting.application.port.out.GetChatRoomPort;
 import io.gaegul.websocketstompchatting.domain.ChatRoom;
 import lombok.RequiredArgsConstructor;
 
@@ -15,15 +15,15 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ChatRoomReadService implements GetChatRoomUseCase {
-	private final GetChatRoomListPort getChatRoomListPort;
+	private final GetChatRoomPort getChatRoomPort;
 
 	@Override
 	public List<ChatRoom> getChatRooms() {
-		return getChatRoomListPort.getChatRooms();
+		return getChatRoomPort.getChatRooms();
 	}
 
 	@Override
 	public ChatRoom getChatRoom(String roomId) {
-		return null;
+		return getChatRoomPort.getChatRoom(roomId);
 	}
 }
