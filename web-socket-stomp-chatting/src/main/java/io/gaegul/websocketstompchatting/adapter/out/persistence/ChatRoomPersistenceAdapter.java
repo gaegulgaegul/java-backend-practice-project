@@ -1,6 +1,7 @@
 package io.gaegul.websocketstompchatting.adapter.out.persistence;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -26,7 +27,8 @@ class ChatRoomPersistenceAdapter implements GetChatRoomPort {
 			return List.of();
 		}
 		return chatRooms.stream()
-			.map(item -> toDomain(item))
+			.map(this::toDomain)
+			.sorted(Comparator.comparing(ChatRoom::getName))
 			.collect(Collectors.toList());
 	}
 
