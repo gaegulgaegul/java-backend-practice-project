@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Service
 @RequiredArgsConstructor
-class ChattingQueryService implements SendMessageUseCase, JoinChatRoomUseCase {
+class ChatQueryService implements SendMessageUseCase, JoinChatRoomUseCase {
 	private final SaveChatPort saveChatPort;
 	private final SendMessagePort sendMessagePort;
 
