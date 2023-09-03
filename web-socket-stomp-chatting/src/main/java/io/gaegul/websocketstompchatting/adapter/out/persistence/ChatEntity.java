@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ChatEntity {
 	private Long id;				// ID
-	private Long senderId;			// 송신자 ID
-	private Long receiverId;		// 수신자 ID
-	private Long roomId;			// 채팅방 ID
+	private String senderId;		// 송신자 ID
+	private String receiverId;		// 수신자 ID
+	private String roomId;			// 채팅방 ID
 	private String message;			// 메세지
 }

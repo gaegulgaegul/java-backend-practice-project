@@ -15,12 +15,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class ChatRequest {
-	@NotNull
-	private Long senderId;			// 송신자 ID
-	@NotNull
-	private Long receiverId;		// 수신자 ID
-	@NotNull
-	private Long roomId;			// 채팅방 ID
+	@NotBlank
+	private String senderId;		// 송신자 ID
+	private String receiverId;		// 수신자 ID
+	@NotBlank
+	private String roomId;			// 채팅방 ID
 	@NotBlank
 	private String message;			// 메세지
 }

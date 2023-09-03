@@ -21,7 +21,7 @@ class ChattingSocketAdapter {
 	 * 채팅 메세지 전달
 	 * @param request
 	 */
-	@MessageMapping("/messages")
+	@MessageMapping("/chat/message")
 	void chat(@Valid ChatRequest request) {
 		sendMessageUseCase.sendMessage(request);
 	}
