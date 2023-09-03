@@ -20,9 +20,9 @@ class ChatRoomPersistenceAdapter implements GetChatRoomListPort {
 
 	@Override
 	public List<ChatRoom> getChatRooms() {
-		Collection<ChatRoomEntity> chatRooms = chatRoomRepository.getChatRooms();
+		Collection<ChatRoomEntity> chatRooms = chatRoomRepository.findAll();
 		if (chatRooms.isEmpty()) {
-			List.of();
+			return List.of();
 		}
 		return chatRooms.stream()
 			.map(item -> new ChatRoom(

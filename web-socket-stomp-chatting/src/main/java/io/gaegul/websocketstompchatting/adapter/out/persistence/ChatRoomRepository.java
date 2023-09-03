@@ -15,11 +15,30 @@ public class ChatRoomRepository {
 	private final Map<String, ChatRoomEntity> chatRoomMap = new HashMap<>();
 	private final Map<String, WebSocketSession> sessionMap = new HashMap<>();
 
-	public ChatRoomEntity getChatRoom(String id) {
+	/**
+	 * 채팅방 목록 조회
+	 * @return
+	 */
+	public Collection<ChatRoomEntity> findAll() {
+		return chatRoomMap.values();
+	}
+
+	/**
+	 * 채팅방 조회
+	 * @param id
+	 * @return
+	 */
+	public ChatRoomEntity findById(String id) {
 		return chatRoomMap.get(id);
 	}
 
-	public Collection<ChatRoomEntity> getChatRooms() {
-		return chatRoomMap.values();
+	/**
+	 * 채팅방 목록 저장
+	 * @param list
+	 */
+	public void saveAll(Collection<ChatRoomEntity> list) {
+		for (ChatRoomEntity entity : list) {
+			this.chatRoomMap.put(entity.getId(), entity);
+		}
 	}
 }
