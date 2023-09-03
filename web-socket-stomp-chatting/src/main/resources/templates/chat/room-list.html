@@ -6,10 +6,32 @@
 </head>
 <body>
 <h1>채팅방 목록</h1>
-<ul>
-    {{#rooms}}
-    <li><a href="/chat/rooms/{{id}}">{{name}}</a></li>
-    {{/rooms}}
+<ul class="rooms">
+<!--    {{#rooms}}-->
+<!--    <li><a href="/chat/rooms/{{id}}">{{name}}</a></li>-->
+<!--    {{/rooms}}-->
 </ul>
 </body>
+<script th:src="@{/webjars/jquery/3.5.1/dist/jquery.min.js}"></script>
+<script th:inline="javascript">
+
+    function renderRooms() {
+        $.ajax({
+            type: 'get',
+            url: "/api/chat/rooms",
+            async: false,
+            success: function(data) {
+                const $rooms = $(".rooms");
+                const rooms = data.map(`<li><a href="/chat/rooms/${item.id}">${item.name}</a></li>`);
+
+                $rooms.children().remove();
+                $rooms.append(rooms);
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        renderRooms();
+    });
+</script>
 </html>

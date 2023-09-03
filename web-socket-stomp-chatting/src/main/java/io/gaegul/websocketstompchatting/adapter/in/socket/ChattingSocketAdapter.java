@@ -1,4 +1,4 @@
-package io.gaegul.websocketstompchatting.adapter.in.web;
+package io.gaegul.websocketstompchatting.adapter.in.socket;
 
 import javax.validation.Valid;
 
