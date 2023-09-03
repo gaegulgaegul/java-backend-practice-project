@@ -5,7 +5,8 @@
 - [ ] 📌 인증&인가를 포함한 RESTful API
 - [ ] 📌 Job Queue를 사용한 작업 스케쥴링&백그라운드 작업
 - [ ] 📌 웹 소켓을 사용한 실시간 채팅 애플리케이션
-  - [가장 간단한 방식의 웹소켓을 이용한 채팅](web-socket-simple-chatting/README.md)
+  - [가장 간단한 방식의 웹 소켓을 이용한 채팅](web-socket-simple-chatting/README.md)
+  - [STOMP를 이용한 웹 소켓 통신 채팅](web-socket-stomp-chatting/README.md)
 - [ ] 📌 통신 프로토콜을 이용한 마이크로서비스 아키텍처
 - [ ] 📌 확장성과 내 결함 성(Fault-Tolerant)이 뛰어난 분산 시스템
 - [ ] 📌 CDN(Content Delivery Network) 통합
