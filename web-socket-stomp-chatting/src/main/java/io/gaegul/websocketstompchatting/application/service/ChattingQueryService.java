@@ -28,7 +28,7 @@ class ChattingQueryService implements SendMessageUseCase, JoinChatRoomUseCase {
 			request.getMessage()
 		);
 		saveChatPort.saveChat(chat);
-		sendMessagePort.sendMessage(chat.getRoomUri(), chat.toJsonMessage());
+		sendMessagePort.sendMessage(chat.getRoomId(), chat.toJsonMessage());
 	}
 
 	@Override
@@ -37,6 +37,6 @@ class ChattingQueryService implements SendMessageUseCase, JoinChatRoomUseCase {
 			request.getSenderId(),
 			request.getRoomId()
 		);
-		sendMessagePort.sendMessage(chat.getRoomUri(), chat.toJsonMessage());
+		sendMessagePort.sendMessage(chat.getRoomId(), chat.toJsonMessage());
 	}
 }

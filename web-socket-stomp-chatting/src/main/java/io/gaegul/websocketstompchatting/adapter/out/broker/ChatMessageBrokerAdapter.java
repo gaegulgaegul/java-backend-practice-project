@@ -15,7 +15,7 @@ class ChatMessageBrokerAdapter implements SendMessagePort {
 	private final SimpMessagingTemplate simpMessagingTemplate;
 
 	@Override
-	public void sendMessage(String uri, String message) {
-		simpMessagingTemplate.convertAndSend(uri, message);
+	public void sendMessage(String roomId, String message) {
+		simpMessagingTemplate.convertAndSend("/subscribe/chat/rooms/" + roomId, message);
 	}
 }
