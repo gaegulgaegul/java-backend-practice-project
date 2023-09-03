@@ -7,8 +7,7 @@
 <body>
 <h1 class="title"></h1>
 <div class="content">
-  <ul class="chat-box">
-  </ul>
+  <ul class="chat-box"></ul>
   <input name="message">
   <button class="send">보내기</button>
 </div>
@@ -36,7 +35,7 @@
             async: false,
             success: function(data) {
                 const $title = $(".title");
-                const title = `${data.name} (${data.id})`
+                const title = `${data.name} (${data.id})`;
 
                 $title.children().remove();
                 $title.append(title);
@@ -48,17 +47,22 @@
         renderRoom();
 
         client.connect({}, () => {
-            // 3. send(path, header, message)로 메시지를 보낼 수 있다.
+            /* 채팅방에 입장하면 기본 메시지를 발생시킨다. */
             client.send('/publish/chat/join', {}, JSON.stringify({roomId: _roomId, sender: _member}));
-            // 4. subscribe(path, callback)로 메시지를 받을 수 있다. callback 첫번째 파라미터의 body로 메시지의 내용이 들어온다.
+
+            /* 웹소켓에서 전달받는 메시지를 출력한다. */
             client.subscribe('/subscribe/chat/rooms/' + _roomId, function(chat) {
                 const content = JSON.parse(chat.body);
                 $chatBox.append('<li>' + content.message + '(' + content.sender + ')</li>');
             });
         });
 
+        /* 버튼을 클릭하면 메시지를 전달한다. */
         $sendButton.click(function () {
             const message = $message.val();
+
+            if (!message) return;
+
             client.send('/publish/chat/message', {}, JSON.stringify({roomId: _roomId, message: message, sender: _member}));
             $message.val('');
         });
