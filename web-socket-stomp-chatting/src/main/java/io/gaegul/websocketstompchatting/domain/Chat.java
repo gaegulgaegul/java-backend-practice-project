@@ -18,10 +18,6 @@ public class Chat {
 	private String roomId;			// 채팅방 ID
 	private String message;			// 메세지
 
-	public String getRoomUri() {
-		return "/subscribe/chat/rooms/" + roomId;
-	}
-
 	public static Chat send(String senderId, String roomId, String message) {
 		return new Chat(senderId, roomId, message);
 	}
