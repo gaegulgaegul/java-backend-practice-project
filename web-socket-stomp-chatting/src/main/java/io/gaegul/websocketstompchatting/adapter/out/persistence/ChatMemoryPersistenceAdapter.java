@@ -7,24 +7,25 @@ import org.springframework.stereotype.Component;
 
 import io.gaegul.websocketstompchatting.application.port.out.SaveChatPort;
 import io.gaegul.websocketstompchatting.domain.Chat;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 채팅 정보 메모리 관리 영속성 어댑터
  */
 @Component
+@RequiredArgsConstructor
 class ChatMemoryPersistenceAdapter implements SaveChatPort {
-
-	private final List<ChatEntity> chats = new ArrayList<>();
+	private final ChatRepository chatRepository;
 
 	@Override
 	public void saveChat(Chat chat) {
 		ChatEntity entity = new ChatEntity(
-			Long.valueOf(chats.size() + 1),
+			Long.valueOf(chatRepository.count() + 1),
 			chat.getSenderId(),
 			chat.getReceiverId(),
 			chat.getRoomId(),
 			chat.getMessage()
 		);
-		chats.add(entity);
+		chatRepository.save(entity);
 	}
 }
