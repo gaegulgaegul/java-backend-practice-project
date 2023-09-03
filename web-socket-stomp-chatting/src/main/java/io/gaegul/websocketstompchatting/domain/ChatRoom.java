@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class ChatRoom {
-	private String id;
-	private String name;
+	private String id;			// ID
+	private String name;		// 채팅방명
 }
