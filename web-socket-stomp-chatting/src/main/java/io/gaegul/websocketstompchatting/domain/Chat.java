@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class Chat {
-	private String senderId;		// 송신자 ID
-	private String roomId;			// 채팅방 ID
-	private String message;			// 메세지
+	private String sender;		// 송신자
+	private String roomId;		// 채팅방 ID
+	private String message;		// 메세지
 
 	public static Chat send(String senderId, String roomId, String message) {
 		return new Chat(senderId, roomId, message);
@@ -26,7 +26,7 @@ public class Chat {
 
 	public String toJsonMessage() {
 		return "{"
-			+ "\"sender\": \"" + senderId + "\","
+			+ "\"sender\": \"" + sender + "\","
 			+ "\"message\": \"" + message + "\""
 			+ "}";
 	}

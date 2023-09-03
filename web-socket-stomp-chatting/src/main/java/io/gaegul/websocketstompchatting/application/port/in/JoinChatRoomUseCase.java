@@ -5,5 +5,9 @@ package io.gaegul.websocketstompchatting.application.port.in;
  */
 public interface JoinChatRoomUseCase {
 
+	/**
+	 * 채팅방 입장
+	 * @param request
+	 */
 	void join(JoinRequest request);
 }

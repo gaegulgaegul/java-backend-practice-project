@@ -45,8 +45,7 @@ class ChatRoomPersistenceAdapter implements GetChatRoomPort {
 	private ChatRoom toDomain(ChatRoomEntity entity) {
 		return new ChatRoom(
 			entity.getId(),
-			entity.getName(),
-			entity.getSessionIds()
+			entity.getName()
 		);
 	}
 }

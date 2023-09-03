@@ -18,7 +18,7 @@ class ChatPersistenceAdapter implements SaveChatPort {
 	public void saveChat(Chat chat) {
 		ChatEntity entity = new ChatEntity(
 			Long.valueOf(chatRepository.count() + 1),
-			chat.getSenderId(),
+			chat.getSender(),
 			chat.getRoomId(),
 			chat.getMessage()
 		);

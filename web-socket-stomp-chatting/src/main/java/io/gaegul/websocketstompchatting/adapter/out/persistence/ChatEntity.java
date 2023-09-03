@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class ChatEntity {
-	private Long id;				// ID
-	private String senderId;		// 송신자 ID
-	private String roomId;			// 채팅방 ID
-	private String message;			// 메세지
+	private Long id;			// ID
+	private String sender;		// 송신자 ID
+	private String roomId;		// 채팅방 ID
+	private String message;		// 메세지
 }

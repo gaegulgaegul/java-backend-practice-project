@@ -23,7 +23,7 @@ class ChattingQueryService implements SendMessageUseCase, JoinChatRoomUseCase {
 	@Override
 	public void sendMessage(ChatRequest request) {
 		Chat chat = Chat.send(
-			request.getSenderId(),
+			request.getSender(),
 			request.getRoomId(),
 			request.getMessage()
 		);
@@ -34,7 +34,7 @@ class ChattingQueryService implements SendMessageUseCase, JoinChatRoomUseCase {
 	@Override
 	public void join(JoinRequest request) {
 		Chat chat = Chat.join(
-			request.getSenderId(),
+			request.getSender(),
 			request.getRoomId()
 		);
 		sendMessagePort.sendMessage(chat.getRoomId(), chat.toJsonMessage());

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class JoinRequest {
 	@NotBlank
-	private String senderId;		// 송신자 ID
+	private String sender;		// 송신자
 	@NotBlank
-	private String roomId;			// 채팅방 ID
+	private String roomId;		// 채팅방 ID
 }

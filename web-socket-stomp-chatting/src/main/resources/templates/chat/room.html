@@ -49,7 +49,7 @@
 
         client.connect({}, () => {
             // 3. send(path, header, message)로 메시지를 보낼 수 있다.
-            client.send('/publish/chat/join', {}, JSON.stringify({roomId: _roomId, senderId: _member}));
+            client.send('/publish/chat/join', {}, JSON.stringify({roomId: _roomId, sender: _member}));
             // 4. subscribe(path, callback)로 메시지를 받을 수 있다. callback 첫번째 파라미터의 body로 메시지의 내용이 들어온다.
             client.subscribe('/subscribe/chat/rooms/' + _roomId, function(chat) {
                 const content = JSON.parse(chat.body);
@@ -59,7 +59,7 @@
 
         $sendButton.click(function () {
             const message = $message.val();
-            client.send('/publish/chat/message', {}, JSON.stringify({roomId: _roomId, message: message, senderId: _member}));
+            client.send('/publish/chat/message', {}, JSON.stringify({roomId: _roomId, message: message, sender: _member}));
             $message.val('');
         });
     });
