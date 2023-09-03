@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web-socket-stomp-chatting</title>
+</head>
+<body>
+<h1 class="title"></h1>
+<div class="content">
+  <ul class="chat-box"></ul>
+  <input name="message">
+  <button class="send">보내기</button>
+</div>
+</body>
+<script th:src="@{/webjars/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const _roomId = /*[[${roomId}]]*/;
+    const _member = /*[[${member}]]*/;
+    /*]]>*/
+
+    const $chatBox = $(".chat-box")
+    const $message = $("input[name='message']");
+    const $sendButton = $(".send");
+
+    const sock = new SockJS("/ws-connection");
+    const client = Stomp.over(sock);
+
+    function renderRoom() {
+        $.ajax({
+            type: 'get',
+            url: `/api/chat/rooms/${_roomId}`,
+            async: false,
+            success: function(data) {
+                const $title = $(".title");
+                const title = `${data.name} (${data.id})`;
+
+                $title.children().remove();
+                $title.append(title);
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        renderRoom();
+
+        client.connect({}, () => {
+            /* 채팅방에 입장하면 기본 메시지를 발생시킨다. */
+            client.send('/publish/chat/join', {}, JSON.stringify({roomId: _roomId, sender: _member}));
+
+            /* 웹소켓에서 전달받는 메시지를 출력한다. */
+            client.subscribe('/subscribe/chat/rooms/' + _roomId, function(chat) {
+                const content = JSON.parse(chat.body);
+                $chatBox.append('<li>' + content.message + '(' + content.sender + ')</li>');
+            });
+        });
+
+        /* 버튼을 클릭하면 메시지를 전달한다. */
+        $sendButton.click(function () {
+            const message = $message.val();
+
+            if (!message) return;
+
+            client.send('/publish/chat/message', {}, JSON.stringify({roomId: _roomId, message: message, sender: _member}));
+            $message.val('');
+        });
+    });
+</script>
+</html>
