@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RestController
 @RequiredArgsConstructor
-class ChattingSocketAdapter {
+class ChatRoomSocketAdapter {
 	private final SendMessageUseCase sendMessageUseCase;
 	private final JoinChatRoomUseCase joinChatRoomUseCase;
 
