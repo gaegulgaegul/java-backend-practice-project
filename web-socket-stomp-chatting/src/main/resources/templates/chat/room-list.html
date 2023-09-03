@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web-socket-stomp-chatting</title>
+</head>
+<body>
+<h1>채팅방 목록</h1>
+<ul class="rooms"></ul>
+</body>
+<script th:src="@{/webjars/jquery/dist/jquery.min.js}"></script>
+<script th:inline="javascript">
+
+    function renderRooms() {
+        $.ajax({
+            type: 'get',
+            url: "/api/chat/rooms",
+            async: false,
+            success: function(data) {
+                const $rooms = $(".rooms");
+                const rooms = data.map(item => `<li><a href="/chat/rooms/${item.id}">${item.name}</a></li>`);
+
+                $rooms.children().remove();
+                $rooms.append(rooms);
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        renderRooms();
+    });
+</script>
+</html>
