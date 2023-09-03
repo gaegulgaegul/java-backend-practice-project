@@ -1,5 +1,7 @@
 package io.gaegul.websocketstompchatting.domain;
 
+import java.util.Map;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,11 +15,25 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Chat {
 	private String senderId;		// 송신자 ID
-	private String receiverId;		// 수신자 ID
 	private String roomId;			// 채팅방 ID
 	private String message;			// 메세지
 
 	public String getRoomUri() {
-		return "/subscribe/rooms/" + roomId;
+		return "/subscribe/chat/rooms/" + roomId;
+	}
+
+	public static Chat send(String senderId, String roomId, String message) {
+		return new Chat(senderId, roomId, message);
+	}
+
+	public static Chat join(String senderId, String roomId) {
+		return new Chat(senderId, roomId, senderId + "님이 입장하셨습니다.");
+	}
+
+	public String toJsonMessage() {
+		return "{"
+			+ "\"sender\": \"" + senderId + "\","
+			+ "\"message\": \"" + message + "\""
+			+ "}";
 	}
 }
