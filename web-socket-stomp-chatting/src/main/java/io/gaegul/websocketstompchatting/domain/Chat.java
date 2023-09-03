@@ -1,7 +1,5 @@
 package io.gaegul.websocketstompchatting.domain;
 
-import java.util.Map;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
